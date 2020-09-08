@@ -4,9 +4,20 @@ public class Radioman {
     private int minChannelNum;
     private int maxChannelNum;
     private int curChannelNum;
-    private int minVolume;
-    private int maxVolume;
+    private int minVolume = 0;
+    private int maxVolume = 100;
     private int curVolume;
+
+    public Radioman(){
+    }
+
+    public Radioman(int minChannelNum, int numOfChannels, int curChannelNum, int curVolume) {
+        this.minChannelNum = minChannelNum;
+        this.maxChannelNum = minChannelNum + numOfChannels - 1;
+        this.setCurChannelNum(curChannelNum);
+
+        this.setCurVolume(curVolume);
+    }
 
     public int getCurChannelNum() {
         return curChannelNum;
@@ -46,16 +57,8 @@ public class Radioman {
         this.maxChannelNum = maxChannelNum;
     }
 
-    public void setMaxVolume(int maxVolume) {
-        this.maxVolume = maxVolume;
-    }
-
     public void setMinChannelNum(int minChannelNum) {
         this.minChannelNum = minChannelNum;
-    }
-
-    public void setMinVolume(int minVolume) {
-        this.minVolume = minVolume;
     }
 
     public void increaseVolume() {
@@ -80,5 +83,13 @@ public class Radioman {
             this.setCurChannelNum(this.getMaxChannelNum());
         else
             this.setCurChannelNum(this.curChannelNum - 1);
+    }
+
+    public void setMaxVolume(int i) {
+        maxVolume = i;
+    }
+
+    public void setMinVolume(int i) {
+        minVolume = i;
     }
 }

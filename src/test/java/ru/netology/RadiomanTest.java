@@ -3,279 +3,132 @@ package ru.netology;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RadiomanTest {
+    Radioman radioman = new Radioman(0, 10, 5, 55);
+
     @Test
     void shouldIncreaseVolume() {
-        Radioman radio = new Radioman();
+        radioman.setCurVolume(5);
+        radioman.increaseVolume();
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-
-        radio.setCurVolume(5);
-
-        int expected = 6;
-        int actual;
-
-        radio.increaseVolume();
-
-        actual = radio.getCurVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(6, radioman.getCurVolume());
     }
 
     @Test
     void shouldIncreaseVolumeHigherThanMax() {
-        Radioman radio = new Radioman();
+        radioman.setCurVolume(100);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.increaseVolume();
 
-        radio.setCurVolume(10);
-
-        int expected = 10;
-        int actual;
-
-        radio.increaseVolume();
-
-        actual = radio.getCurVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(100, radioman.getCurVolume());
     }
 
     @Test
     void shouldDecreaseVolume() {
-        Radioman radio = new Radioman();
+        radioman.setCurVolume(5);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.decreaseVolume();
 
-        radio.setCurVolume(5);
-
-        int expected = 4;
-        int actual;
-
-        radio.decreaseVolume();
-
-        actual = radio.getCurVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(4, radioman.getCurVolume() );
     }
 
     @Test
     void shouldDecreaseVolumeLowerThanMin() {
-        Radioman radio = new Radioman();
+        radioman.setCurVolume(0);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.decreaseVolume();
 
-        radio.setCurVolume(0);
-
-        int expected = 0;
-        int actual;
-
-        radio.decreaseVolume();
-
-        actual = radio.getCurVolume();
-
-        assertEquals(expected, actual);
+        assertEquals(0, radioman.getCurVolume());
     }
 
     @Test
     void shouldIncreaseChannelNum() {
-        Radioman radio = new Radioman();
+        radioman.setCurChannelNum(5);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.increaseChannelNum();
 
-        radio.setCurChannelNum(5);
-
-        int expected = 6;
-        int actual;
-
-        radio.increaseChannelNum();
-
-        actual = radio.getCurChannelNum();
-
-        assertEquals(expected, actual);
+        assertEquals(6, radioman.getCurChannelNum());
     }
 
     @Test
     void shouldIncreaseChannelNumHigherThanMax() {
-        Radioman radio = new Radioman();
+        radioman.setCurChannelNum(radioman.getMaxChannelNum());
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.increaseChannelNum();
 
-        radio.setCurChannelNum(9);
-
-        int expected = 0;
-        int actual;
-
-        radio.increaseChannelNum();
-
-        actual = radio.getCurChannelNum();
-
-        assertEquals(expected, actual);
+        assertEquals(radioman.getMinChannelNum(), radioman.getCurChannelNum() );
     }
 
     @Test
     void shouldDecreaseChannelNum() {
-        Radioman radio = new Radioman();
+        radioman.setCurChannelNum(5);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.decreaseChannelNum();
 
-        radio.setCurChannelNum(5);
-
-        int expected = 4;
-        int actual;
-
-        radio.decreaseChannelNum();
-
-        actual = radio.getCurChannelNum();
-
-        assertEquals(expected, actual);
+        assertEquals(4, radioman.getCurChannelNum());
     }
 
     @Test
     void shouldDecreaseChannelNumLowerThanMin() {
-        Radioman radio = new Radioman();
+        radioman.setCurChannelNum(radioman.getMinChannelNum());
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.decreaseChannelNum();
 
-        radio.setCurChannelNum(0);
-
-        int expected = 9;
-        int actual;
-
-        radio.decreaseChannelNum();
-
-        actual = radio.getCurChannelNum();
-
-        assertEquals(expected, actual);
+        assertEquals(radioman.getMaxChannelNum(), radioman.getCurChannelNum());
     }
 
     @Test
     void shouldSetChannelNUm() {
-        Radioman radio = new Radioman();
+        radioman.setCurChannelNum(1);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
+        radioman.setCurChannelNum(2);
 
-        radio.setCurChannelNum(1);
-
-        radio.setCurChannelNum(2);
-
-        int expected = 2;
-        int actual;
-
-        actual = radio.getCurChannelNum();
-
-        assertEquals(expected, actual);
+        assertEquals(2, radioman.getCurChannelNum());
     }
 
     @Test
     void shouldSetInvalidHighChannelNum() {
-        Radioman radio = new Radioman();
+        radioman.setCurChannelNum((radioman.getMaxChannelNum() - radioman.getMinChannelNum())/2);
+        radioman.setCurChannelNum(radioman.getMaxChannelNum() + 10);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-
-        radio.setCurChannelNum(1);
-
-        radio.setCurChannelNum(25);
-
-        int expected = 1;
-        int actual;
-
-        actual = radio.getCurChannelNum();
-
-        assertEquals(expected, actual);
+        assertEquals((radioman.getMaxChannelNum() - radioman.getMinChannelNum())/2, radioman.getCurChannelNum());
     }
 
     @Test
     void shouldSetInvalidLowChannelNum() {
-        Radioman radio = new Radioman();
+        radioman.setCurChannelNum((radioman.getMaxChannelNum() - radioman.getMinChannelNum())/2);
+        radioman.setCurChannelNum(radioman.getMinChannelNum() - 10);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-
-        radio.setCurChannelNum(1);
-
-        radio.setCurChannelNum(-50);
-
-        int expected = 1;
-        int actual;
-
-        actual = radio.getCurChannelNum();
-
-        assertEquals(expected, actual);
+        assertEquals((radioman.getMaxChannelNum() - radioman.getMinChannelNum())/2, radioman.getCurChannelNum());
     }
 
     @Test
     void shouldSetInvalidHighVolume() {
-        Radioman radio = new Radioman();
+        radioman.setCurVolume((radioman.getMaxVolume() - radioman.getMinVolume())/2);
+        radioman.setCurVolume(radioman.getMaxVolume() + 10);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-
-        radio.setCurVolume(4);
-
-        radio.setCurVolume(25);
-
-        int expected = 4;
-        int actual;
-
-        actual = radio.getCurVolume();
-
-        assertEquals(expected, actual);
+        assertEquals((radioman.getMaxVolume() - radioman.getMinVolume())/2, radioman.getCurVolume());
     }
 
     @Test
     void shouldSetInvalidLowVolume() {
-        Radioman radio = new Radioman();
+        radioman.setCurVolume((radioman.getMaxVolume() - radioman.getMinVolume())/2);
+        radioman.setCurVolume(radioman.getMinVolume() - 10);
 
-        radio.setMaxChannelNum(9);
-        radio.setMinChannelNum(0);
-        radio.setMaxVolume(10);
-        radio.setMinVolume(0);
-
-        radio.setCurVolume(4);
-
-        radio.setCurVolume(-5);
-
-        int expected = 4;
-        int actual;
-
-        actual = radio.getCurVolume();
-
-        assertEquals(expected, actual);
+        assertEquals((radioman.getMaxVolume() - radioman.getMinVolume())/2, radioman.getCurVolume());
     }
 
+    @Test
+    void shouldSetFields(){
+
+
+        assertEquals(5, radioman.getCurChannelNum());
+        assertEquals(0, radioman.getMinChannelNum());
+        assertEquals(9, radioman.getMaxChannelNum());
+        assertEquals(0, radioman.getMinVolume());
+        assertEquals(100, radioman.getMaxVolume());
+        assertEquals(55, radioman.getCurVolume());
+    }
 }

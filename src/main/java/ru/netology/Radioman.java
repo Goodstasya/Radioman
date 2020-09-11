@@ -1,35 +1,26 @@
 package ru.netology;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
 public class Radioman {
     private int minChannelNum;
     private int maxChannelNum;
     private int curChannelNum;
-    private int minVolume;
-    private int maxVolume;
+    private int minVolume = 0;
+    private int maxVolume = 100;
     private int curVolume;
 
-    public int getCurChannelNum() {
-        return curChannelNum;
+    public Radioman(){
     }
 
-    public int getCurVolume() {
-        return curVolume;
-    }
+    public Radioman(int minChannelNum, int numOfChannels, int curChannelNum, int curVolume) {
+        this.minChannelNum = minChannelNum;
+        this.maxChannelNum = minChannelNum + numOfChannels - 1;
+        this.setCurChannelNum(curChannelNum);
 
-    public int getMaxChannelNum() {
-        return maxChannelNum;
-    }
-
-    public int getMaxVolume() {
-        return maxVolume;
-    }
-
-    public int getMinChannelNum() {
-        return minChannelNum;
-    }
-
-    public int getMinVolume() {
-        return minVolume;
+        this.setCurVolume(curVolume);
     }
 
     public void setCurChannelNum(int curChannelNum) {
@@ -40,22 +31,6 @@ public class Radioman {
     public void setCurVolume(int curVolume) {
         if ((curVolume >= this.getMinVolume()) && curVolume <= this.getMaxVolume())
             this.curVolume = curVolume;
-    }
-
-    public void setMaxChannelNum(int maxChannelNum) {
-        this.maxChannelNum = maxChannelNum;
-    }
-
-    public void setMaxVolume(int maxVolume) {
-        this.maxVolume = maxVolume;
-    }
-
-    public void setMinChannelNum(int minChannelNum) {
-        this.minChannelNum = minChannelNum;
-    }
-
-    public void setMinVolume(int minVolume) {
-        this.minVolume = minVolume;
     }
 
     public void increaseVolume() {
